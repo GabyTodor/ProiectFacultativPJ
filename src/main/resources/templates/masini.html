@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista Masini</title>
+</head>
+<body>
+<h2>Bine ai venit, <span th:text="${#authentication.name}"></span></h2>
+
+<form th:action="@{/masini/afisare}" method="get">
+    <div>
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" name="marca" placeholder="marca">
+    </div>
+    <div>
+        <label for="culoare">Culoare:</label>
+        <input type="text" id="culoare" name="culoare" placeholder="culoare">
+    </div>
+    <div>
+        <label for="combustibil">Combustibil:</label>
+        <input type="text" id="combustibil" name="combustibil" placeholder="combustibil">
+    </div>
+    <button type="submit">Filtreaza</button>
+</form>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Număr Înmatriculare</th>
+        <th>Marca</th>
+        <th>Model</th>
+        <th>Culoare</th>
+        <th>An Fabricatie</th>
+        <th>Capacitate Cilindrica</th>
+        <th>Combustibil</th>
+        <th>Putere</th>
+        <th>Cuplu</th>
+        <th>Volum Portbagaj</th>
+        <th>Pret</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="masina : ${masini}">
+        <td th:text="${masina.nrInmatriculare}"></td>
+        <td th:text="${masina.marca}"></td>
+        <td th:text="${masina.model}"></td>
+        <td th:text="${masina.culoare}"></td>
+        <td th:text="${masina.anFabricatie}"></td>
+        <td th:text="${masina.capacitateCilindrica}"></td>
+        <td th:text="${masina.combustibil}"></td>
+        <td th:text="${masina.putere}"></td>
+        <td th:text="${masina.cuplu}"></td>
+        <td th:text="${masina.volumPortbagaj}"></td>
+        <td th:text="${masina.pret}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/logout}">Logout</a>
+</body>
+</html>

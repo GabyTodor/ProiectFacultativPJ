@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Operatii masini</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Bine ai venit, <span th:text="${#authentication.name}">Utilizator</span></h1>
+
+    <form th:action="@{/operatii/modifica}" method="post">
+        <h3>Adăugare/Modificare</h3>
+        <div>
+            <label>Numar înmatriculare:</label>
+            <input type="text" name="nrInmatriculare" required>
+        </div>
+        <div>
+            <label>Marca:</label>
+            <input type="text" name="marca">
+        </div>
+        <div>
+            <label>Model:</label>
+            <input type="text" name="model">
+        </div>
+        <div>
+            <label>Culoare:</label>
+            <input type="text" name="culoare">
+        </div>
+        <div>
+            <label>An fabricație:</label>
+            <input type="number" name="anFabricatie" min="0">
+        </div>
+        <div>
+            <label>Capacitate cilindrica:</label>
+            <input type="number" name="capacitateCilindrica" min="0">
+        </div>
+        <div>
+            <label>Tipul de combustibil:</label>
+            <select id="combustibil" name="combustibil">
+                <option value="motorina">motorină</option>
+                <option value="benzina">benzina</option>
+                <option value="electric">electric</option>
+                <option value="electric">hibrid</option>
+            </select>
+        </div>
+        <div>
+            <label>Putere:</label>
+            <input type="number" name="putere" min="0">
+        </div>
+        <div>
+            <label>Cuplu:</label>
+            <input type="number" name="cuplu" min="0">
+        </div>
+        <div>
+            <label>Volum Portbagaj:</label>
+            <input type="number" name="volumPortbagaj" min="0">
+        </div>
+        <div>
+            <label>Pret:</label>
+            <input type="number" name="pret" min="0">
+        </div>
+
+        <!-- Ascunde un câmp pentru tipul acțiunii -->
+        <input type="hidden" name="actionType" value="adauga">
+        <button type="submit" onclick="this.form.action='/operatii/adauga'; this.form.actionType.value='adauga';">Adaugă</button>
+        <button type="submit" onclick="this.form.action='/operatii/modifica'; this.form.actionType.value='modifica';">Modifică</button>
+    </form>
+
+
+    <form th:action="@{/operatii/sterge}" method="post">
+        <h3>Ștergere</h3>
+        <div>
+            <label>Numar înmatriculare:</label>
+            <input type="text" name="nrInmatriculare" required>
+        </div>
+        <button type="submit">Șterge</button>
+    </form>
+
+    <h3>Lista mașinilor</h3>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Număr înmatriculare</th>
+            <th>Marcă</th>
+            <th>Model</th>
+            <th>Culoare</th>
+            <th>An Fabricatie</th>
+            <th>Capacitate cilindrica</th>
+            <th>Tip combustibil</th>
+            <th>Putere</th>
+            <th>Cuplu</th>
+            <th>Volum portbagaj</th>
+            <th>Pret</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="masina : ${masini}">
+            <td th:text="${masina.nrInmatriculare}"></td>
+            <td th:text="${masina.marca}"></td>
+            <td th:text="${masina.model}"></td>
+            <td th:text="${masina.culoare}"></td>
+            <td th:text="${masina.anFabricatie}"></td>
+            <td th:text="${masina.capacitateCilindrica}"></td>
+            <td th:text="${masina.combustibil}"></td>
+            <td th:text="${masina.putere}"></td>
+            <td th:text="${masina.cuplu}"></td>
+            <td th:text="${masina.volumPortbagaj}"></td>
+            <td th:text="${masina.pret}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/logout">Logout</a>
+</div>
+</body>
+</html>
